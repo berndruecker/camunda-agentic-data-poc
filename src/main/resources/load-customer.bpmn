@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gbt075" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="load-customer" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Customer required">
+      <bpmn:outgoing>Flow_0zd6f7a</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_0ne7y5m" name="What data is provided?" default="Flow_Default">
+      <bpmn:incoming>Flow_0zd6f7a</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mjz9fi</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ddtu2s</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1nto79k</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Default</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0zd6f7a" sourceRef="StartEvent_1" targetRef="Gateway_0ne7y5m" />
+    <bpmn:sequenceFlow id="Flow_1mjz9fi" name="id" sourceRef="Gateway_0ne7y5m" targetRef="Activity_02q86sb">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.id != null</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ddtu2s" name="email" sourceRef="Gateway_0ne7y5m" targetRef="Tool_StartEcommerceAgent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.email != null</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1nto79k" name="full name" sourceRef="Gateway_0ne7y5m" targetRef="Activity_0f51v2e">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.fullName != null</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Default" name="other" sourceRef="Gateway_0ne7y5m" targetRef="Activity_07hshre" />
+    <bpmn:sequenceFlow id="Flow_17limzr" sourceRef="Activity_02q86sb" targetRef="Gateway_13m9ee7" />
+    <bpmn:scriptTask id="Activity_07hshre" name="Search customer">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={}" resultVariable="customer" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Default</bpmn:incoming>
+      <bpmn:outgoing>Flow_11mwqhj</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_0f51v2e" name="Lookup customer by full name">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="customer" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1nto79k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1oxhrsc</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Tool_StartEcommerceAgent" name="Lookup customer by email">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:input source="ecommerceAgentStart" target="messageName" />
+          <zeebe:input source="=supportCase.communicationContext.correlationId" target="correlationKey" />
+          <zeebe:input source="={&#10;  &#34;supportCase&#34;: supportCase,&#10;  &#34;customer&#34;: customer,&#10;  &#34;request&#34;: fromAi(toolCall.customerDesireToPassToTheAgent)&#10;}" target="variables" />
+          <zeebe:input source="publish" target="correlationType.type" />
+          <zeebe:input source="PT60S" target="correlationType.timeToLive" />
+        </zeebe:ioMapping>
+        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="customer" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ddtu2s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j94w0j</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_02q86sb" name="Lookup customer by id">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="customer" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1mjz9fi</bpmn:incoming>
+      <bpmn:outgoing>Flow_17limzr</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:exclusiveGateway id="Gateway_13m9ee7">
+      <bpmn:incoming>Flow_17limzr</bpmn:incoming>
+      <bpmn:incoming>Flow_11mwqhj</bpmn:incoming>
+      <bpmn:incoming>Flow_1oxhrsc</bpmn:incoming>
+      <bpmn:incoming>Flow_0j94w0j</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kp6uc6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_11mwqhj" sourceRef="Activity_07hshre" targetRef="Gateway_13m9ee7" />
+    <bpmn:sequenceFlow id="Flow_1oxhrsc" sourceRef="Activity_0f51v2e" targetRef="Gateway_13m9ee7" />
+    <bpmn:sequenceFlow id="Flow_0j94w0j" sourceRef="Tool_StartEcommerceAgent" targetRef="Gateway_13m9ee7" />
+    <bpmn:exclusiveGateway id="Gateway_1mwelhp" name="Unique customer found?">
+      <bpmn:incoming>Flow_0kp6uc6</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lnphpo</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ju0ixh</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_1ue7mqc" name="Customer found">
+      <bpmn:incoming>Flow_1lnphpo</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1lnphpo" sourceRef="Gateway_1mwelhp" targetRef="Event_1ue7mqc">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_0uqrie0" name="No customer found">
+      <bpmn:incoming>Flow_1ju0ixh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1ju0ixh" sourceRef="Gateway_1mwelhp" targetRef="Event_0uqrie0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0kp6uc6" sourceRef="Gateway_13m9ee7" targetRef="Gateway_1mwelhp" />
+    <bpmn:textAnnotation id="TextAnnotation_0uwkvhn">
+      <bpmn:text>search: {
+  id:...,
+  email:...,
+  fullName:....
+}</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0d0avqz" associationDirection="None" sourceRef="StartEvent_1" targetRef="TextAnnotation_0uwkvhn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="load-customer">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="176" y="295" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0ne7y5m_di" bpmnElement="Gateway_0ne7y5m" isMarkerVisible="true">
+        <dc:Bounds x="275" y="245" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="269" y="208" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cpvr63_di" bpmnElement="Activity_07hshre">
+        <dc:Bounds x="390" y="570" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hfnvc9_di" bpmnElement="Activity_0f51v2e">
+        <dc:Bounds x="390" y="450" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0h9u1n6_di" bpmnElement="Tool_StartEcommerceAgent">
+        <dc:Bounds x="390" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mu1ece_di" bpmnElement="Activity_02q86sb">
+        <dc:Bounds x="390" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_13m9ee7_di" bpmnElement="Gateway_13m9ee7" isMarkerVisible="true">
+        <dc:Bounds x="555" y="245" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1mwelhp_di" bpmnElement="Gateway_1mwelhp" isMarkerVisible="true">
+        <dc:Bounds x="665" y="245" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="647" y="207.5" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ue7mqc_di" bpmnElement="Event_1ue7mqc">
+        <dc:Bounds x="772" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="751" y="295" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0uqrie0_di" bpmnElement="Event_0uqrie0">
+        <dc:Bounds x="772" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="758" y="405" width="64" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0d0avqz_di" bpmnElement="Association_0d0avqz">
+        <di:waypoint x="208" y="254" />
+        <di:waypoint x="255" y="164" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0uwkvhn_di" bpmnElement="TextAnnotation_0uwkvhn">
+        <dc:Bounds x="240" y="80" width="100" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0zd6f7a_di" bpmnElement="Flow_0zd6f7a">
+        <di:waypoint x="218" y="270" />
+        <di:waypoint x="275" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mjz9fi_di" bpmnElement="Flow_1mjz9fi">
+        <di:waypoint x="325" y="270" />
+        <di:waypoint x="390" y="270" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="353" y="252" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ddtu2s_di" bpmnElement="Flow_1ddtu2s">
+        <di:waypoint x="300" y="295" />
+        <di:waypoint x="300" y="380" />
+        <di:waypoint x="390" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="316" y="353" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nto79k_di" bpmnElement="Flow_1nto79k">
+        <di:waypoint x="300" y="295" />
+        <di:waypoint x="300" y="490" />
+        <di:waypoint x="390" y="490" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="317" y="463" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wi0tfe_di" bpmnElement="Flow_Default">
+        <di:waypoint x="300" y="295" />
+        <di:waypoint x="300" y="610" />
+        <di:waypoint x="390" y="610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="316" y="583" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11mwqhj_di" bpmnElement="Flow_11mwqhj">
+        <di:waypoint x="490" y="610" />
+        <di:waypoint x="580" y="610" />
+        <di:waypoint x="580" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oxhrsc_di" bpmnElement="Flow_1oxhrsc">
+        <di:waypoint x="490" y="490" />
+        <di:waypoint x="580" y="490" />
+        <di:waypoint x="580" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j94w0j_di" bpmnElement="Flow_0j94w0j">
+        <di:waypoint x="490" y="380" />
+        <di:waypoint x="580" y="380" />
+        <di:waypoint x="580" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17limzr_di" bpmnElement="Flow_17limzr">
+        <di:waypoint x="490" y="270" />
+        <di:waypoint x="555" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kp6uc6_di" bpmnElement="Flow_0kp6uc6">
+        <di:waypoint x="605" y="270" />
+        <di:waypoint x="665" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lnphpo_di" bpmnElement="Flow_1lnphpo">
+        <di:waypoint x="715" y="270" />
+        <di:waypoint x="772" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ju0ixh_di" bpmnElement="Flow_1ju0ixh">
+        <di:waypoint x="690" y="295" />
+        <di:waypoint x="690" y="380" />
+        <di:waypoint x="772" y="380" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
