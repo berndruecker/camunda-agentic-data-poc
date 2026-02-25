@@ -7,18 +7,15 @@
     <bpmn:exclusiveGateway id="Gateway_0ne7y5m" name="What data is provided?" default="Flow_Default">
       <bpmn:incoming>Flow_0zd6f7a</bpmn:incoming>
       <bpmn:outgoing>Flow_1mjz9fi</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1ddtu2s</bpmn:outgoing>
       <bpmn:outgoing>Flow_1nto79k</bpmn:outgoing>
       <bpmn:outgoing>Flow_Default</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ddtu2s</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0zd6f7a" sourceRef="StartEvent_1" targetRef="Gateway_0ne7y5m" />
     <bpmn:sequenceFlow id="Flow_1mjz9fi" name="id" sourceRef="Gateway_0ne7y5m" targetRef="Activity_02q86sb">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.id != null</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1ddtu2s" name="email" sourceRef="Gateway_0ne7y5m" targetRef="Tool_StartEcommerceAgent">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.email != null</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1nto79k" name="full name" sourceRef="Gateway_0ne7y5m" targetRef="Activity_0f51v2e">
+    <bpmn:sequenceFlow id="Flow_1nto79k" name="full name" sourceRef="Gateway_0ne7y5m" targetRef="Event_042qajy">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.fullName != null</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_Default" name="other" sourceRef="Gateway_0ne7y5m" targetRef="Activity_07hshre" />
@@ -32,9 +29,8 @@
     </bpmn:scriptTask>
     <bpmn:scriptTask id="Activity_0f51v2e" name="Lookup supplier by full name">
       <bpmn:extensionElements>
-        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="customer" />
+        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="supplier" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1nto79k</bpmn:incoming>
       <bpmn:outgoing>Flow_1oxhrsc</bpmn:outgoing>
     </bpmn:scriptTask>
     <bpmn:scriptTask id="Tool_StartEcommerceAgent" name="Lookup supplier by email">
@@ -46,14 +42,14 @@
           <zeebe:input source="publish" target="correlationType.type" />
           <zeebe:input source="PT60S" target="correlationType.timeToLive" />
         </zeebe:ioMapping>
-        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="customer" />
+        <zeebe:script expression="=if search.email=&#34;supplier@camunda.com&#34; then &#10;{&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;supplier@amunda.com&#34;,&#10;  id: &#34;SUP-123&#34;&#10;} &#10;else if search.email=&#34;somebody@camunda.com&#34; then &#10;{&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;somebody@amunda.com&#34;,&#10;  id: &#34;SUP-234&#34;&#10;} &#10;else {}" resultVariable="supplier" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ddtu2s</bpmn:incoming>
       <bpmn:outgoing>Flow_0j94w0j</bpmn:outgoing>
     </bpmn:scriptTask>
     <bpmn:scriptTask id="Activity_02q86sb" name="Lookup supplier by id">
       <bpmn:extensionElements>
-        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="customer" />
+        <zeebe:script expression="={&#10;  fullName: &#34;John Doe&#34;,&#10;  email: &#34;demo@amunda.com&#34;,&#10;  id: &#34;1234&#34;&#10;}" resultVariable="supplier" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1mjz9fi</bpmn:incoming>
       <bpmn:outgoing>Flow_17limzr</bpmn:outgoing>
@@ -68,7 +64,7 @@
     <bpmn:sequenceFlow id="Flow_11mwqhj" sourceRef="Activity_07hshre" targetRef="Gateway_13m9ee7" />
     <bpmn:sequenceFlow id="Flow_1oxhrsc" sourceRef="Activity_0f51v2e" targetRef="Gateway_13m9ee7" />
     <bpmn:sequenceFlow id="Flow_0j94w0j" sourceRef="Tool_StartEcommerceAgent" targetRef="Gateway_13m9ee7" />
-    <bpmn:exclusiveGateway id="Gateway_1mwelhp" name="Unique supplier found?">
+    <bpmn:exclusiveGateway id="Gateway_1mwelhp" name="Unique supplier found?" default="Flow_1ju0ixh">
       <bpmn:incoming>Flow_0kp6uc6</bpmn:incoming>
       <bpmn:outgoing>Flow_1lnphpo</bpmn:outgoing>
       <bpmn:outgoing>Flow_1ju0ixh</bpmn:outgoing>
@@ -77,15 +73,29 @@
       <bpmn:incoming>Flow_1lnphpo</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1lnphpo" sourceRef="Gateway_1mwelhp" targetRef="Event_1ue7mqc">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=true</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=supplier != null and count(get entries(supplier)) &gt; 0</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_0uqrie0" name="No supplier found">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=null" target="supplier" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ju0ixh</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1ju0ixh" sourceRef="Gateway_1mwelhp" targetRef="Event_0uqrie0">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ju0ixh" sourceRef="Gateway_1mwelhp" targetRef="Event_0uqrie0" />
     <bpmn:sequenceFlow id="Flow_0kp6uc6" sourceRef="Gateway_13m9ee7" targetRef="Gateway_1mwelhp" />
+    <bpmn:sequenceFlow id="Flow_1ddtu2s" name="email" sourceRef="Gateway_0ne7y5m" targetRef="Tool_StartEcommerceAgent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=search.email != null</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_042qajy" name="No supplier found">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=null" target="supplier" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1nto79k</bpmn:incoming>
+    </bpmn:endEvent>
     <bpmn:textAnnotation id="TextAnnotation_0uwkvhn">
       <bpmn:text>search: {
   id:...,
@@ -146,6 +156,12 @@
           <dc:Bounds x="747" y="405" width="87" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1j35ib6" bpmnElement="Event_042qajy">
+        <dc:Bounds x="182" y="522" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="565" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0uwkvhn_di" bpmnElement="TextAnnotation_0uwkvhn">
         <dc:Bounds x="240" y="80" width="100" height="84" />
         <bpmndi:BPMNLabel />
@@ -171,10 +187,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1nto79k_di" bpmnElement="Flow_1nto79k">
         <di:waypoint x="300" y="295" />
-        <di:waypoint x="300" y="490" />
-        <di:waypoint x="390" y="490" />
+        <di:waypoint x="300" y="540" />
+        <di:waypoint x="218" y="540" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="317" y="463" width="45" height="14" />
+          <dc:Bounds x="267" y="520" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1wi0tfe_di" bpmnElement="Flow_Default">
