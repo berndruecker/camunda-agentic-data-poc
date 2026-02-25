@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_09w5b7d" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_09w5b7d" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.44.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
   <bpmn:process id="simple-email-agent" isExecutable="true">
     <bpmn:sequenceFlow id="Flow_0bgr4oc" sourceRef="Event_0aolqb7" targetRef="SubProcess_CommunicationAgent" />
     <bpmn:adHocSubProcess id="SubProcess_CommunicationAgent" zeebe:modelerTemplate="io.camunda.connectors.agenticai.aiagent.jobworker.v1" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNBNTZFRkYiLz4KPG1hc2sgaWQ9InBhdGgtMi1vdXRzaWRlLTFfMTg1XzYiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjQiIHk9IjQiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iYmxhY2siPgo8cmVjdCBmaWxsPSJ3aGl0ZSIgeD0iNCIgeT0iNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMDEwNSAxMi4wOTg3QzE4LjQ5IDEwLjU4OTQgMTcuMTU5NCA4LjEwODE0IDE2LjE3OTkgNi4wMTEwM0MxNi4xNTIgNi4wMDQ1MSAxNi4xMTc2IDYgMTYuMDc5NCA2QzE2LjA0MTEgNiAxNi4wMDY2IDYuMDA0NTEgMTUuOTc4OCA2LjAxMTA0QzE0Ljk5OTQgOC4xMDgxNCAxMy42Njk3IDEwLjU4ODkgMTIuMTQ4MSAxMi4wOTgxQzEwLjYyNjkgMTMuNjA3MSA4LjEyNTY4IDE0LjkyNjQgNi4wMTE1NyAxNS44OTgxQzYuMDA0NzQgMTUuOTI2MSA2IDE1Ljk2MTEgNiAxNkM2IDE2LjAzODcgNi4wMDQ2OCAxNi4wNzM2IDYuMDExNDQgMTYuMTAxNEM4LjEyNTE5IDE3LjA3MjkgMTAuNjI2MiAxOC4zOTE5IDEyLjE0NzcgMTkuOTAxNkMxMy42Njk3IDIxLjQxMDcgMTQuOTk5NiAyMy44OTIgMTUuOTc5MSAyNS45ODlDMTYuMDA2OCAyNS45OTU2IDE2LjA0MTEgMjYgMTYuMDc5MyAyNkMxNi4xMTc1IDI2IDE2LjE1MTkgMjUuOTk1NCAxNi4xNzk2IDI1Ljk4OUMxNy4xNTkxIDIzLjg5MiAxOC40ODg4IDIxLjQxMSAyMC4wMDk5IDE5LjkwMjFNMjAuMDA5OSAxOS45MDIxQzIxLjUyNTMgMTguMzk4NyAyMy45NDY1IDE3LjA2NjkgMjUuOTkxNSAxNi4wODI0QzI1Ljk5NjUgMTYuMDU5MyAyNiAxNi4wMzEgMjYgMTUuOTk5N0MyNiAxNS45Njg0IDI1Ljk5NjUgMTUuOTQwMyAyNS45OTE1IDE1LjkxNzFDMjMuOTQ3NCAxNC45MzI3IDIxLjUyNTkgMTMuNjAxIDIwLjAxMDUgMTIuMDk4NyIvPgo8L21hc2s+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMDEwNSAxMi4wOTg3QzE4LjQ5IDEwLjU4OTQgMTcuMTU5NCA4LjEwODE0IDE2LjE3OTkgNi4wMTEwM0MxNi4xNTIgNi4wMDQ1MSAxNi4xMTc2IDYgMTYuMDc5NCA2QzE2LjA0MTEgNiAxNi4wMDY2IDYuMDA0NTEgMTUuOTc4OCA2LjAxMTA0QzE0Ljk5OTQgOC4xMDgxNCAxMy42Njk3IDEwLjU4ODkgMTIuMTQ4MSAxMi4wOTgxQzEwLjYyNjkgMTMuNjA3MSA4LjEyNTY4IDE0LjkyNjQgNi4wMTE1NyAxNS44OTgxQzYuMDA0NzQgMTUuOTI2MSA2IDE1Ljk2MTEgNiAxNkM2IDE2LjAzODcgNi4wMDQ2OCAxNi4wNzM2IDYuMDExNDQgMTYuMTAxNEM4LjEyNTE5IDE3LjA3MjkgMTAuNjI2MiAxOC4zOTE5IDEyLjE0NzcgMTkuOTAxNkMxMy42Njk3IDIxLjQxMDcgMTQuOTk5NiAyMy44OTIgMTUuOTc5MSAyNS45ODlDMTYuMDA2OCAyNS45OTU2IDE2LjA0MTEgMjYgMTYuMDc5MyAyNkMxNi4xMTc1IDI2IDE2LjE1MTkgMjUuOTk1NCAxNi4xNzk2IDI1Ljk4OUMxNy4xNTkxIDIzLjg5MiAxOC40ODg4IDIxLjQxMSAyMC4wMDk5IDE5LjkwMjFNMjAuMDA5OSAxOS45MDIxQzIxLjUyNTMgMTguMzk4NyAyMy45NDY1IDE3LjA2NjkgMjUuOTkxNSAxNi4wODI0QzI1Ljk5NjUgMTYuMDU5MyAyNiAxNi4wMzEgMjYgMTUuOTk5N0MyNiAxNS45Njg0IDI1Ljk5NjUgMTUuOTQwMyAyNS45OTE1IDE1LjkxNzFDMjMuOTQ3NCAxNC45MzI3IDIxLjUyNTkgMTMuNjAxIDIwLjAxMDUgMTIuMDk4NyIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC4wMTA1IDEyLjA5ODdDMTguNDkgMTAuNTg5NCAxNy4xNTk0IDguMTA4MTQgMTYuMTc5OSA2LjAxMTAzQzE2LjE1MiA2LjAwNDUxIDE2LjExNzYgNiAxNi4wNzk0IDZDMTYuMDQxMSA2IDE2LjAwNjYgNi4wMDQ1MSAxNS45Nzg4IDYuMDExMDRDMTQuOTk5NCA4LjEwODE0IDEzLjY2OTcgMTAuNTg4OSAxMi4xNDgxIDEyLjA5ODFDMTAuNjI2OSAxMy42MDcxIDguMTI1NjggMTQuOTI2NCA2LjAxMTU3IDE1Ljg5ODFDNi4wMDQ3NCAxNS45MjYxIDYgMTUuOTYxMSA2IDE2QzYgMTYuMDM4NyA2LjAwNDY4IDE2LjA3MzYgNi4wMTE0NCAxNi4xMDE0QzguMTI1MTkgMTcuMDcyOSAxMC42MjYyIDE4LjM5MTkgMTIuMTQ3NyAxOS45MDE2QzEzLjY2OTcgMjEuNDEwNyAxNC45OTk2IDIzLjg5MiAxNS45NzkxIDI1Ljk4OUMxNi4wMDY4IDI1Ljk5NTYgMTYuMDQxMSAyNiAxNi4wNzkzIDI2QzE2LjExNzUgMjYgMTYuMTUxOSAyNS45OTU0IDE2LjE3OTYgMjUuOTg5QzE3LjE1OTEgMjMuODkyIDE4LjQ4ODggMjEuNDExIDIwLjAwOTkgMTkuOTAyMU0yMC4wMDk5IDE5LjkwMjFDMjEuNTI1MyAxOC4zOTg3IDIzLjk0NjUgMTcuMDY2OSAyNS45OTE1IDE2LjA4MjRDMjUuOTk2NSAxNi4wNTkzIDI2IDE2LjAzMSAyNiAxNS45OTk3QzI2IDE1Ljk2ODQgMjUuOTk2NSAxNS45NDAzIDI1Ljk5MTUgMTUuOTE3MUMyMy45NDc0IDE0LjkzMjcgMjEuNTI1OSAxMy42MDEgMjAuMDEwNSAxMi4wOTg3IiBzdHJva2U9IiM0OTFEOEIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgbWFzaz0idXJsKCNwYXRoLTItb3V0c2lkZS0xXzE4NV82KSIvPgo8L3N2Zz4K">
@@ -14,8 +14,8 @@
           <zeebe:input source="=5000" target="provider.bedrock.model.parameters.maxTokens" />
           <zeebe:input source="=0.2" target="provider.bedrock.model.parameters.temperature" />
           <zeebe:input source="=0.1" target="provider.bedrock.model.parameters.topP" />
-          <zeebe:input source="=&#34;&#10;You are an email bot trying to satisfy business partner requests. You MUST use your own domain knowledge and the tools provided at runtime for this.&#10;&#10;Your assistant messages are NEVER seen by the business partner. Do NOT answer directly, do NOT chat, do NOT explain tools. Your job is ONLY to decide which tools to call and to call them.&#10;&#10;Use \&#34;Tool_Ask\&#34; to send any text or questions to the business partner. If you ask the business partner a question, you MUST immediately call \&#34;Tool_WaitForResponse\&#34; afterwards.&#10;&#10;If any required information is missing, use \&#34;Tool_Ask\&#34; to request it from the business partner, then call \&#34;Tool_WaitForResponse\&#34;. If you truly cannot fulfill the request even with tools, call \&#34;Tool_Ask\&#34; with a very short apology.&#10;&#10;Email context:&#10;&#10;You can leverage the following information from the incoming email to identify business partners:&#10;&#10;From: &#34;&#10;+ message.from + &#34;&#10;Name: &#34;&#10;+ message.name + &#34;&#10;&#34;&#10;" target="data.systemPrompt.prompt" />
-          <zeebe:input source="=message.text" target="data.userPrompt.prompt" />
+          <zeebe:input source="=&#34;&#10;# INPUT VARIABLES&#10;You are provided with an incoming email message object containing the following fields:&#10;- From: &#34; + (if message.from != null then message.from else &#34;&#34;) + &#34; (The email address of the sender)&#10;- Name: &#34; + (if message.name != null then message.name else &#34;&#34;)  + &#34; (The display name of the sender)&#10;&#10;# TASK DESCRIPTION&#10;Role: You are an autonomous Email Automation Bot responsible for satisfying business partner requests found in the input.&#10;&#10;Objective:&#10;Analyze the incoming message and determine the correct course of action. You must use your internal domain knowledge to answer questions or fulfill requests.&#10;&#10;Constraints &#38; Rules:&#10;1. Invisible Thought: Your internal reasoning is never seen by the user. Do NOT generate conversational filler, pleasantries, or explanations of what you are doing.&#10;2. Tool-First Output: Your ONLY output should be the execution of the appropriate tool calls.&#10;3. Mandatory Workflow:&#10;- If you need to send information, an answer, or a clarifying question to the partner, use \&#34;Ask business partner\&#34;.&#10;- CRITICAL: Immediately after calling \&#34;Ask business partner\&#34;, you MUST call \&#34;Wait for business partner response\&#34; to pause execution and await the user&#39;s reply. These two tools usually function as a pair.&#10;4. Error Handling: If a request is impossible to fulfill even with your domain knowledge, call \&#34;Ask business partner\&#34; to send a polite, concise apology, then stop.&#10;&#10;# AVAILABLE TOOLS&#10;You have access to the following functions:&#10;&#10;- \&#34;Ask business partner\&#34;&#10;Usage: Use this to send a message back to the business partner. This includes answers to their questions, requests for missing information, or status updates.&#10;&#10;- \&#34;Wait for business partner response\&#34;&#10;Usage: Triggers a system pause to wait for the business partner&#39;s reply.&#10;Condition: Must be called immediately after \&#34;Ask business partner\&#34; if you expect or require a reply from the user.&#10;&#10;&#10;# Business Partner Identification Strategy&#10;&#10;Before asking the business partner for any identifiers, you must always first try to identify them automatically using the data that is already available to you (for example: email address, display name, or any IDs mentioned in the message text).&#10;&#34;" target="data.systemPrompt.prompt" />
+          <zeebe:input source="=message" target="data.userPrompt.prompt" />
           <zeebe:input target="agentContext" />
           <zeebe:input source="in-process" target="data.memory.storage.type" />
           <zeebe:input source="=20" target="data.memory.contextWindowSize" />
@@ -42,23 +42,20 @@
         <bpmn:extensionElements>
           <zeebe:calledElement processId="load-customer" propagateAllChildVariables="false" propagateAllParentVariables="false" />
           <zeebe:ioMapping>
-            <zeebe:input source="={&#10;  &#34;id&#34;: fromAi(value: toolCall.customerId, otpions: { required: false}),&#10;  &#34;email&#34;: fromAi(value: toolCall.customerEmailAddress, otpions: { required: false}),&#10;    &#34;fullName&#34;: fromAi(value: toolCall.customerFullName, otpions: { required: false})&#10;}" target="search" />
+            <zeebe:input source="={&#10;  &#34;id&#34;: fromAi(value: toolCall.customerId, options: { required: false}),&#10;  &#34;email&#34;: fromAi(value: toolCall.customerEmailAddress, options: { required: false}),&#10;    &#34;fullName&#34;: fromAi(value: toolCall.customerFullName, options: { required: false})&#10;}" target="search" />
             <zeebe:output source="=customer" target="toolCallResult" />
+            <zeebe:output source="=customer" target="customer" />
           </zeebe:ioMapping>
         </bpmn:extensionElements>
       </bpmn:callActivity>
-      <bpmn:receiveTask id="Tool_WaitForResponse" name="Wait for business partner response" messageRef="Message_15eqr9h">
-        <bpmn:extensionElements>
-          <zeebe:ioMapping />
-        </bpmn:extensionElements>
-      </bpmn:receiveTask>
       <bpmn:callActivity id="Tool_LoadSupplier" name="Supplier">
         <bpmn:documentation>Load supplier entity</bpmn:documentation>
         <bpmn:extensionElements>
           <zeebe:calledElement processId="load-supplier" propagateAllChildVariables="false" propagateAllParentVariables="false" />
           <zeebe:ioMapping>
-            <zeebe:input source="={&#10;  &#34;id&#34;: fromAi(value: toolCall.supplierId, otpions: { required: false}),&#10;  &#34;email&#34;: fromAi(value: toolCall.supplierEmailAddress, otpions: { required: false}),&#10;    &#34;fullName&#34;: fromAi(value: toolCall.supplierFullName, otpions: { required: false})&#10;}" target="search" />
-            <zeebe:output source="=customer" target="toolCallResult" />
+            <zeebe:input source="={&#10;  &#34;id&#34;: fromAi(value: toolCall.supplierId, options: { required: false}),&#10;  &#34;email&#34;: fromAi(value: toolCall.supplierEmailAddress, options: { required: false}),&#10;   &#34;fullName&#34;: fromAi(value: toolCall.supplierFullName, options: { required: false})&#10;}" target="search" />
+            <zeebe:output source="=supplier" target="toolCallResult" />
+            <zeebe:output source="=supplier" target="supplier" />
           </zeebe:ioMapping>
         </bpmn:extensionElements>
       </bpmn:callActivity>
@@ -87,6 +84,12 @@
           </zeebe:taskHeaders>
         </bpmn:extensionElements>
       </bpmn:sendTask>
+      <bpmn:scriptTask id="Tool_WaitForResponse" name="Wait for business partner response">
+        <bpmn:extensionElements>
+          <zeebe:ioMapping />
+          <zeebe:script expression="={toolCallResult: { response: &#34;Here is my id: 1234&#34; }&#10;}" resultVariable="scriptResponse" />
+        </bpmn:extensionElements>
+      </bpmn:scriptTask>
     </bpmn:adHocSubProcess>
     <bpmn:endEvent id="EndEvent_CaseResolved" name="Case resolved">
       <bpmn:incoming>Flow_0ej315i</bpmn:incoming>
@@ -95,7 +98,7 @@
     <bpmn:startEvent id="Event_0aolqb7" name="Email received">
       <bpmn:extensionElements>
         <zeebe:ioMapping>
-          <zeebe:output source="={&#10;    &#34;id&#34;: &#34;1&#34;,&#10;    &#34;from&#34;: &#34;demo@amunda.com&#34;,&#10;    &#34;text&#34;: &#34;I need my master data documents&#34;&#10;}" target="message" />
+          <zeebe:output source="={&#10;    &#34;id&#34;: &#34;1&#34;,&#10;    &#34;from&#34;: &#34;demo@amunda.com&#34;,&#10;    &#34;name&#34;: &#34;Bernd&#34;,&#10;    &#34;text&#34;: &#34;I need my master data documents&#34;&#10;}" target="message" />
         </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0bgr4oc</bpmn:outgoing>
@@ -157,64 +160,63 @@
   </bpmn:message>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="simple-email-agent">
-      <bpmndi:BPMNShape id="Event_0whixnv_di" bpmnElement="Event_0aolqb7">
-        <dc:Bounds x="172" y="272" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="154" y="318" width="73" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0vgvidi" bpmnElement="SubProcess_CommunicationAgent" isExpanded="true">
-        <dc:Bounds x="450" y="80" width="450" height="470" />
+        <dc:Bounds x="330" y="80" width="450" height="470" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1a1aev6" bpmnElement="Tool_LoadCustomer">
-        <dc:Bounds x="500" y="380" width="100" height="80" />
+        <dc:Bounds x="380" y="380" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0wsz7yz" bpmnElement="Tool_LoadSupplier">
-        <dc:Bounds x="500" y="280" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0l19q61_di" bpmnElement="Tool_WaitForResponse">
-        <dc:Bounds x="680" y="120" width="100" height="80" />
+        <dc:Bounds x="380" y="280" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ah3g2n_di" bpmnElement="Tool_LoadDocuments">
-        <dc:Bounds x="680" y="280" width="100" height="80" />
+        <dc:Bounds x="560" y="280" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0tx17mp_di" bpmnElement="Tool_Ask">
-        <dc:Bounds x="500" y="120" width="100" height="80" />
+        <dc:Bounds x="380" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12k4u4d_di" bpmnElement="Tool_WaitForResponse">
+        <dc:Bounds x="560" y="120" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1msk788_di" bpmnElement="EndEvent_CaseResolved">
-        <dc:Bounds x="1132" y="272" width="36" height="36" />
+        <dc:Bounds x="842" y="272" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1115" y="315" width="71" height="14" />
+          <dc:Bounds x="825" y="315" width="71" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0jd20el_di" bpmnElement="Association_0jd20el">
-        <di:waypoint x="200" y="275" />
-        <di:waypoint x="222" y="244" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0a16odo_di" bpmnElement="Association_0a16odo">
-        <di:waypoint x="600" y="421" />
-        <di:waypoint x="660" y="429" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bgr4oc_di" bpmnElement="Flow_0bgr4oc">
-        <di:waypoint x="208" y="290" />
-        <di:waypoint x="450" y="290" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ej315i_di" bpmnElement="Flow_0ej315i">
-        <di:waypoint x="900" y="290" />
-        <di:waypoint x="1132" y="290" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0whixnv_di" bpmnElement="Event_0aolqb7">
+        <dc:Bounds x="192" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="174" y="318" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_00unkcd_di" bpmnElement="TextAnnotation_00unkcd">
-        <dc:Bounds x="220" y="160" width="100" height="84" />
+        <dc:Bounds x="160" y="160" width="100" height="84" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_12kthvg_di" bpmnElement="TextAnnotation_12kthvg">
-        <dc:Bounds x="660" y="420" width="100" height="41" />
+        <dc:Bounds x="540" y="420" width="100" height="41" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0bgr4oc_di" bpmnElement="Flow_0bgr4oc">
+        <di:waypoint x="228" y="290" />
+        <di:waypoint x="330" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ej315i_di" bpmnElement="Flow_0ej315i">
+        <di:waypoint x="780" y="290" />
+        <di:waypoint x="842" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0jd20el_di" bpmnElement="Association_0jd20el">
+        <di:waypoint x="207" y="273" />
+        <di:waypoint x="201" y="244" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0a16odo_di" bpmnElement="Association_0a16odo">
+        <di:waypoint x="480" y="421" />
+        <di:waypoint x="540" y="429" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

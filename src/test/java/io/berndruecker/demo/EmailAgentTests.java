@@ -2,6 +2,7 @@ package io.berndruecker.demo;
 
 import static io.camunda.process.test.api.CamundaAssert.assertThat;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import io.camunda.client.CamundaClient;
 import io.camunda.client.annotation.Deployment;
 import io.camunda.client.api.response.ProcessInstanceEvent;
+import io.camunda.process.test.api.CamundaAssert;
 import io.camunda.process.test.api.CamundaProcessTestContext;
 import io.camunda.process.test.api.CamundaSpringProcessTest;
 
@@ -52,9 +54,10 @@ class EmailAgentTests {
         
         assertThat(processInstance)
           .isCompleted()
-          .hasVariableSatisfies("agent", String.class, agent -> {
+/*          .hasVariableSatisfies("agent", String.class, agent -> {
             System.out.println(agent);            
            })
+*/
           .hasCompletedElement("Tool_Ask", 1)
           .hasCompletedElement("Tool_LoadCustomer", 1)
           .hasVariableSatisfies("customer", java.util.Map.class, customer -> {
@@ -63,13 +66,14 @@ class EmailAgentTests {
         
     }
     public static String buildMessage(String text) {
-      return buildMessage(UUID.randomUUID().toString(), EMAIL_ADDRESS, text);
+      return buildMessage(UUID.randomUUID().toString(), EMAIL_ADDRESS, "Demo", text);
       
     }    
-    public static String buildMessage(String id, String from, String text) {
+    public static String buildMessage(String id, String from, String name, String text) {
         return "{\r\n"
             + "    \"id\": \""+id+"\",\r\n"
             + "    \"from\": \"" + from + "\",\r\n"
+            + "    \"name\": \"" + name + "\",\r\n"
             + "    \"text\": \"" + text + "\""
             + "}";
     }
